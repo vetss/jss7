@@ -490,6 +490,7 @@ public class AspFactoryImpl implements AssociationListener, XMLSerializable, Asp
                         int seqControl = payload.getData().getSLS();
                         payloadData = new org.mobicents.protocols.api.PayloadData(byteBuf.readableBytes(), byteBuf, true,
                                 false, SCTP_PAYLOAD_PROT_ID_M3UA, this.slsTable[seqControl]);
+//                        payloadData.setTcapLocalTxId(payload.getTcapLocalTxId());
                         break;
                     default:
                         payloadData = new org.mobicents.protocols.api.PayloadData(byteBuf.readableBytes(), byteBuf, true, true,
@@ -498,6 +499,7 @@ public class AspFactoryImpl implements AssociationListener, XMLSerializable, Asp
                 }
 
                 this.association.send(payloadData);
+//                logger.debug("M3UA Tx "+ payloadData.getTcapLocalTxId());
 
                 // congestion control - we will send MTP-PAUSE every 8 messages
                 int congLevel = this.association.getCongestionLevel();
@@ -525,6 +527,7 @@ public class AspFactoryImpl implements AssociationListener, XMLSerializable, Asp
                             int seqControl = payload.getData().getSLS();
                             payloadData = new org.mobicents.protocols.api.PayloadData(byteBuf.readableBytes(), bf, true, false,
                                     SCTP_PAYLOAD_PROT_ID_M3UA, this.slsTable[seqControl]);
+//                            payloadData.setTcapLocalTxId(payload.getTcapLocalTxId());
                             break;
                         default:
                             payloadData = new org.mobicents.protocols.api.PayloadData(byteBuf.readableBytes(), bf, true, true,
@@ -533,6 +536,7 @@ public class AspFactoryImpl implements AssociationListener, XMLSerializable, Asp
                     }
 
                     this.association.send(payloadData);
+//                    logger.warn("M3UA Tx "+ payloadData.getTcapLocalTxId());
                 }
             }
         } catch (Throwable e) {

@@ -53,6 +53,20 @@ public abstract class SccpMessageImpl implements SccpMessage {
     protected int outgoingDpc = -1;
     protected int networkId;
 
+    protected Long tcapLocalTxId;
+
+    protected SccpMessageImpl(Long tcapLocalTxId, int maxDataLen, int type, int sls, int localSsn) {
+        this.isMtpOriginated = false;
+        this.type = type;
+        this.localOriginSsn = localSsn;
+        this.incomingOpc = -1;
+        this.incomingDpc = -1;
+        this.sls = sls;
+        this.maxDataLen = maxDataLen;
+
+        this.tcapLocalTxId = tcapLocalTxId;
+    }
+
     protected SccpMessageImpl(int maxDataLen, int type, int sls, int localSsn) {
         this.isMtpOriginated = false;
         this.type = type;
@@ -123,6 +137,14 @@ public abstract class SccpMessageImpl implements SccpMessage {
 
     public void setNetworkId(int networkId) {
         this.networkId = networkId;
+    }
+
+    public Long getTcapLocalTxId() {
+        return tcapLocalTxId;
+    }
+
+    public void setTcapLocalTxId(Long tcapLocalTxId) {
+        this.tcapLocalTxId = tcapLocalTxId;
     }
 
     public abstract void decode(InputStream in, ParameterFactory factory, SccpProtocolVersion sccpProtocolVersion) throws ParseException;

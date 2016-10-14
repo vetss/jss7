@@ -253,15 +253,18 @@ public class SccpRoutingControl {
                     // nonsegmented data
                     Mtp3TransferPrimitive msg = factory.createMtp3TransferPrimitive(Mtp3._SI_SERVICE_SCCP, sap.getNi(), 0,
                             sap.getOpc(), dpc, sls, erd.getSolidData());
+                    msg.setTcapLocalTxId(message.getTcapLocalTxId());                    
                     mup.sendMessage(msg);
                 } else {
                     // segmented data
                     for (byte[] bf : erd.getSegementedData()) {
                         Mtp3TransferPrimitive msg = factory.createMtp3TransferPrimitive(Mtp3._SI_SERVICE_SCCP, sap.getNi(), 0,
                                 sap.getOpc(), dpc, sls, bf);
+                        msg.setTcapLocalTxId(message.getTcapLocalTxId());                        
                         mup.sendMessage(msg);
                     }
                 }
+                logger.debug("SCCP Tx "+ message.getTcapLocalTxId());
                 return null;
 
             case ReturnFailure:

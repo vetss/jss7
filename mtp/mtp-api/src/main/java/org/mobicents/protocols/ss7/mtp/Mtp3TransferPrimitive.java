@@ -36,7 +36,7 @@ public class Mtp3TransferPrimitive {
     protected final int dpc;
     protected final int sls;
     protected final byte[] data;
-
+    protected Long tcapLocalTxId;
     private final RoutingLabelFormat pointCodeFormat;
 
     protected Mtp3TransferPrimitive(int si, int ni, int mp, int opc, int dpc, int sls, byte[] data,
@@ -78,6 +78,14 @@ public class Mtp3TransferPrimitive {
 
     public byte[] getData() {
         return this.data;
+    }
+
+    public Long getTcapLocalTxId() {
+        return tcapLocalTxId;
+    }
+
+    public void setTcapLocalTxId(Long tcapLocalTxId) {
+        this.tcapLocalTxId = tcapLocalTxId;
     }
 
     public byte[] encodeMtp3() {

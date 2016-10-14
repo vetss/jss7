@@ -66,6 +66,14 @@ public class MessageFactoryImpl implements MessageFactory {
                 calledParty, callingParty, data, hopCounter, importance);
     }
 
+    public SccpDataMessage createDataMessageClass1(Long localDialogTxId, SccpAddress calledParty, SccpAddress callingParty, byte[] data, int sls,
+            int localSsn, boolean returnMessageOnError, HopCounter hopCounter, Importance importance) {
+        SccpDataMessageImpl sccpDataMessageImpl = new SccpDataMessageImpl( this.sccpStackImpl.getMaxDataMessage(),new ProtocolClassImpl(1, returnMessageOnError), sls, localSsn,
+                calledParty, callingParty, data, hopCounter, importance);
+        sccpDataMessageImpl.setTcapLocalTxId(localDialogTxId);
+        return sccpDataMessageImpl;
+    }
+
     public SccpNoticeMessage createNoticeMessage(int origMsgType, ReturnCause returnCause, SccpAddress calledParty,
             SccpAddress callingParty, byte[] data, HopCounter hopCounter, Importance importance) {
         int type = SccpMessage.MESSAGE_TYPE_UNDEFINED;

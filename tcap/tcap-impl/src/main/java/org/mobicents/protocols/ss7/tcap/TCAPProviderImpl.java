@@ -306,14 +306,17 @@ public class TCAPProviderImpl implements TCAPProvider, SccpListener {
         return this.dialogs.size();
     }
 
-    public void send(byte[] data, boolean returnMessageOnError, SccpAddress destinationAddress, SccpAddress originatingAddress,
-            int seqControl, int networkId) throws IOException {
+//    public void send(byte[] data, boolean returnMessageOnError, SccpAddress destinationAddress, SccpAddress originatingAddress,
+//            int seqControl, int networkId) throws IOException {
+    public void send(Long dialogId, byte[] data, boolean returnMessageOnError, SccpAddress destinationAddress,
+            SccpAddress originatingAddress, int seqControl, int networkId) throws IOException {
         if (this.stack.getPreviewMode())
             return;
 
         SccpDataMessage msg = messageFactory.createDataMessageClass1(destinationAddress, originatingAddress, data, seqControl,
                 this.ssn, returnMessageOnError, null, null);
         msg.setNetworkId(networkId);
+        msg.setTcapLocalTxId(dialogId);
         sccpProvider.send(msg);
     }
 
@@ -547,7 +550,8 @@ public class TCAPProviderImpl implements TCAPProvider, SccpListener {
             if (this.stack.getStatisticsEnabled()) {
                 this.stack.getCounterProviderImpl().updateTcPAbortSentCount(remoteTransactionId, pAbortCause);
             }
-            this.send(aos.toByteArray(), false, remoteAddress, localAddress, seqControl, networkId);
+//            this.send(aos.toByteArray(), false, remoteAddress, localAddress, seqControl, networkId);
+            this.send(-1l, aos.toByteArray(), false, remoteAddress, localAddress, seqControl, networkId);
         } catch (Exception e) {
             if (logger.isEnabledFor(Level.ERROR)) {
                 logger.error("Failed to send message: ", e);
@@ -585,7 +589,8 @@ public class TCAPProviderImpl implements TCAPProvider, SccpListener {
             if (this.stack.getStatisticsEnabled()) {
                 this.stack.getCounterProviderImpl().updateTcPAbortSentCount(remoteTransactionId, PAbortCauseType.NoReasonGiven);
             }
-            this.send(aos.toByteArray(), false, remoteAddress, localAddress, seqControl, networkId);
+//            this.send(aos.toByteArray(), false, remoteAddress, localAddress, seqControl, networkId);
+            this.send(-1l, aos.toByteArray(), false, remoteAddress, localAddress, seqControl, networkId);
         } catch (Exception e) {
             if (logger.isEnabledFor(Level.ERROR)) {
                 logger.error("Failed to send message: ", e);

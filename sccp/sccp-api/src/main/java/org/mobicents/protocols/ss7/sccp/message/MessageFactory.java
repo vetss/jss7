@@ -69,6 +69,9 @@ public interface MessageFactory extends Serializable {
     SccpDataMessage createDataMessageClass1(SccpAddress calledParty, SccpAddress callingParty, byte[] data, int sls,
             int localSsn, boolean returnMessageOnError, HopCounter hopCounter, Importance importance);
 
+    SccpDataMessage createDataMessageClass1(Long localDialogTxId, SccpAddress calledParty, SccpAddress callingParty, byte[] data, int sls,
+            int localSsn, boolean returnMessageOnError, HopCounter hopCounter, Importance importance);
+
     // SccpNoticeMessage createNoticeMessage(ReturnCause returnCause, int outgoingSls, SccpAddress calledParty,
     // SccpAddress callingParty, byte[] data,
     // HopCounter hopCounter, Importance importance);

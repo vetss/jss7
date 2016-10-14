@@ -42,7 +42,7 @@ import org.mobicents.protocols.ss7.m3ua.parameter.RoutingContext;
  * @author kulikov
  */
 public class PayloadDataImpl extends M3UAMessageImpl implements PayloadData {
-
+    protected Long tcapLocalTxId;
     public PayloadDataImpl() {
         super(MessageClass.TRANSFER_MESSAGES, MessageType.PAYLOAD, MessageType.S_PAYLOAD);
     }
@@ -84,7 +84,13 @@ public class PayloadDataImpl extends M3UAMessageImpl implements PayloadData {
             parameters.put(Parameter.Correlation_ID, corrId);
         }
     }
+    public Long getTcapLocalTxId() {
+        return tcapLocalTxId;
+    }
 
+    public void setTcapLocalTxId(Long tcapLocalTxId) {
+        this.tcapLocalTxId = tcapLocalTxId;
+    }
     @Override
     public String toString() {
         return "TransferMessage: " + parameters;

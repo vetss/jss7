@@ -48,5 +48,6 @@ public interface PayloadData extends M3UAMessage {
     CorrelationId getCorrelationId();
 
     void setCorrelationId(CorrelationId corrId);
-
+    Long getTcapLocalTxId();
+    void setTcapLocalTxId(Long tcapLocalTxId);
 }

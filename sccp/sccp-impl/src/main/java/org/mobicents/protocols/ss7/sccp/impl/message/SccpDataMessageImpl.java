@@ -46,6 +46,14 @@ public class SccpDataMessageImpl extends SccpDataNoticeTemplateMessageImpl imple
 
     protected ProtocolClass protocolClass;
 
+    protected SccpDataMessageImpl(Long tcapLocalDialogTxId, int maxDataLen, ProtocolClass protocolClass, int outgoingSls, int localSsn,
+            SccpAddress calledParty, SccpAddress callingParty, byte[] data, HopCounter hopCounter, Importance importance) {
+        super(maxDataLen, SccpMessage.MESSAGE_TYPE_UNDEFINED, outgoingSls, localSsn, calledParty, callingParty, data,
+                hopCounter, importance);
+
+        this.protocolClass = protocolClass;
+    }
+
     /**
      * Create a SCCP-User originated message
      *

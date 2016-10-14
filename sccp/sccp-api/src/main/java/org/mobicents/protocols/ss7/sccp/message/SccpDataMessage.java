@@ -53,5 +53,6 @@ public interface SccpDataMessage extends SccpAddressedMessage {
     void setData(byte[] data);
 
     void setImportance(Importance p);
-
+    Long getTcapLocalTxId();
+    void setTcapLocalTxId(Long tcapLocalTxId);
 }
