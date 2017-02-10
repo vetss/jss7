@@ -155,25 +155,39 @@
 	        </copy>
     	
 
-		<echo>Copy Shell</echo>
-		<copy todir="${restcomm.jss7.dist}/ss7/shell/lib" failonerror="true">
-			<fileset dir="${jss7.dir}/management/shell-client/target/restcomm-cli/lib">
-				<include name="**" />
-			</fileset>
-		</copy>
-		<copy todir="${restcomm.jss7.dist}/ss7/shell/bin" failonerror="true">
-			<fileset dir="${jss7.dir}/management/shell-client/target/restcomm-cli/bin">
-				<include name="**" />
-			</fileset>
-		</copy>
-		<copy file="${jss7.dir}/hardware/cli/target/linkset-cli.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib" failonerror="true" />
-		<copy file="${jss7.dir}/m3ua/cli/m3ua/target/m3ua-cli-m3ua.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib" failonerror="true" />
-		<copy file="${jss7.dir}/m3ua/cli/sctp/target/m3ua-cli-sctp.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib" failonerror="true" />
-		<copy file="${jss7.dir}/sccp/sccp-cli/target/sccp-cli.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib" failonerror="true" />
-		<copy file="${jss7.dir}/tcap/tcap-cli/target/tcap-cli.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib" failonerror="true" />
-		<copy file="${jss7.dir}/tcap-ansi/tcap-ansi-cli/target/tcap-ansi-cli.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib" failonerror="true" />
-		<copy file="${jss7.dir}/release/release-build.xml" tofile="${restcomm.jss7.dist}/ss7/build.xml" failonerror="true" />
+        <echo>Copy Shell</echo>
+        <copy todir="${restcomm.jss7.dist}/ss7/shell/lib" failonerror="true">
+            <fileset dir="${jss7.dir}/management/shell-client/target/restcomm-cli/lib">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <copy todir="${restcomm.jss7.dist}/ss7/shell/bin" failonerror="true">
+            <fileset dir="${jss7.dir}/management/shell-client/target/restcomm-cli/bin">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <copy file="${jss7.dir}/hardware/cli/target/linkset-cli.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib"
+              failonerror="true"/>
+        <copy file="${jss7.dir}/m3ua/cli/m3ua/target/m3ua-cli-m3ua.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib"
+              failonerror="true"/>
+        <copy file="${jss7.dir}/m3ua/cli/sctp/target/m3ua-cli-sctp.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib"
+              failonerror="true"/>
+        <copy file="${jss7.dir}/sccp/sccp-cli/target/sccp-cli.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib"
+              failonerror="true"/>
+        <copy file="${jss7.dir}/tcap/tcap-cli/target/tcap-cli.jar" todir="${restcomm.jss7.dist}/ss7/shell/lib"
+              failonerror="true"/>
+        <copy file="${jss7.dir}/tcap-ansi/tcap-ansi-cli/target/tcap-ansi-cli.jar"
+              todir="${restcomm.jss7.dist}/ss7/shell/lib" failonerror="true"/>
 
+        <!-- Copy files for deploying/undeployng jSS7 to JBoss 5 and WildFly -->
+        <copy file="/release/release-build-jboss5.xml" tofile="${restcomm.jss7.dist}/ss7/build-jboss5.xml"
+              failonerror="true"/>
+        <copy file="/release/release-build-wildfly.xml" tofile="${restcomm.jss7.dist}/ss7/build-wildfly.xml"
+              failonerror="true"/>
+        <copy file="/release/wildfly-jss7-subsystem.txt" tofile="${restcomm.jss7.dist}/ss7/wildfly-jss7-subsystem.txt"
+              failonerror="true"/>
+
+        <!-- Copy templates for JBoss 5 -->
         <copy todir="${restcomm.jss7.dist}/ss7/template/META-INF-dialogic/" failonerror="true">
                 <fileset dir="${jss7.dir}/service/src/main/config-dialogic">
                         <include name="**" />
@@ -186,18 +200,19 @@
         </copy>
 
         <copy todir="${restcomm.jss7.dist}/ss7/template/log4j/" failonerror="true">
-                <fileset dir="${jss7.dir}/service/src/main/log4j">
-                        <include name="**" />
-                </fileset>
+            <fileset dir="${jss7.dir}/service/src/main/log4j">
+                <include name="**" />
+            </fileset>
         </copy>
 
-<!--
+        <!-- Copy RestComm SS7 Service for JBoss 5 -->
         <copy todir="${restcomm.jss7.dist}/ss7/restcomm-ss7-service" failonerror="true">
-                <fileset dir="${jss7.dir}/service/target/restcomm-ss7-service">
-                        <include name="**" />
-                </fileset>
+            <fileset dir="${jss7.dir}/service/target/restcomm-ss7-service">
+                <include name="**"/>
+            </fileset>
         </copy>
--->
+
+        <!-- Copy RestComm SS7 Service for WildFly -->
         <copy todir="${restcomm.jss7.dist}/ss7/restcomm-ss7-service/extension" failonerror="true">
             <fileset dir="${jss7.dir}/build/wildfly/extension/target/module">
                 <include name="**"/>
@@ -293,49 +308,78 @@
         </copy>
 -->
 
-		<mkdir dir="${docs.dir}/userguide"/>
-		<mkdir dir="${docs.dir}/installationguide"/>
-		<mkdir dir="${docs.dir}/userguide/html-book"/>
-		<copy todir="${docs.dir}/userguide/html-book" failonerror="true">
-			<fileset dir="${jss7.dir}/docs/userguide/sources-asciidoc/target/generated-docs/html-book/">
-				<include name="**" />
-			</fileset>
-		</copy>
-		<mkdir dir="${docs.dir}/installationguide/html-book"/>
-		<copy todir="${docs.dir}/installationguide/html-book" failonerror="true">
-			<fileset dir="${jss7.dir}/docs/installationguide/sources-asciidoc/target/generated-docs/html-book/">
-			<include name="**" />
-		</fileset>
-		</copy>
-		<mkdir dir="${docs.dir}/userguide/pdf"/>
-		<copy todir="${docs.dir}/userguide/pdf" failonerror="true">
-			<fileset dir="${jss7.dir}/docs/userguide/sources-asciidoc/target/generated-docs/pdf/">
-				<include name="**.pdf" />
-			</fileset>
-		</copy>
-		<mkdir dir="${docs.dir}/installationguide/pdf"/>
-		<copy todir="${docs.dir}/installationguide/pdf" failonerror="true">
-			<fileset dir="${jss7.dir}/docs/installationguide/sources-asciidoc/target/generated-docs/pdf/">
-				<include name="**.pdf" />
-			</fileset>
-		</copy>
-	
-        <!--copy todir="${docs.dir}" failonerror="true">
-                <fileset dir="${jss7.dir}/docs/userguide/jdocbook-restcomm/target/docbook/publish/en-US/pdf">
-                        <include name="*.pdf" />
-                </fileset>
+        <mkdir dir="${docs.dir}/SCTPLibrary"/>
+        <mkdir dir="${docs.dir}/SCTPLibrary/html-book"/>
+        <copy todir="${docs.dir}/SCTPLibrary/html-book" failonerror="true">
+            <fileset dir="${checkout.sctp.dir}/docs/sources-asciidoc/target/generated-docs/html-book/">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <mkdir dir="${docs.dir}/SCTPLibrary/pdf"/>
+        <copy todir="${docs.dir}/SCTPLibrary/pdf" failonerror="true">
+            <fileset dir="${checkout.sctp.dir}/docs/sources-asciidoc/target/generated-docs/pdf/">
+                <include name="**.pdf"/>
+            </fileset>
+        </copy>
+
+        <!--
+        <copy todir="${docs.dir}" failonerror="true">
+            <fileset dir="${checkout.asn.dir}/docs/jdocbook-mobicents/target/docbook/publish/en-US/pdf">
+                    <include name="*.pdf" />
+            </fileset>
+        </copy>
+        <copy todir="${docs.dir}" failonerror="true">
+            <fileset dir="${checkout.sctp.dir}/docs/jdocbook-mobicents/target/docbook/publish/en-US/pdf">
+                    <include name="*.pdf" />
+            </fileset>
+        </copy>
+        -->
+
+        <mkdir dir="${docs.dir}/userguide"/>
+        <mkdir dir="${docs.dir}/installationguide"/>
+        <mkdir dir="${docs.dir}/userguide/html-book"/>
+        <copy todir="${docs.dir}/userguide/html-book" failonerror="true">
+            <fileset dir="${jss7.dir}/docs/userguide/sources-asciidoc/target/generated-docs/html-book/">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <mkdir dir="${docs.dir}/installationguide/html-book"/>
+        <copy todir="${docs.dir}/installationguide/html-book" failonerror="true">
+            <fileset dir="${jss7.dir}/docs/installationguide/sources-asciidoc/target/generated-docs/html-book/">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <mkdir dir="${docs.dir}/userguide/pdf"/>
+        <copy todir="${docs.dir}/userguide/pdf" failonerror="true">
+            <fileset dir="${jss7.dir}/docs/userguide/sources-asciidoc/target/generated-docs/pdf/">
+                <include name="**.pdf"/>
+            </fileset>
+        </copy>
+        <mkdir dir="${docs.dir}/installationguide/pdf"/>
+        <copy todir="${docs.dir}/installationguide/pdf" failonerror="true">
+            <fileset dir="${jss7.dir}/docs/installationguide/sources-asciidoc/target/generated-docs/pdf/">
+                <include name="**.pdf"/>
+            </fileset>
+        </copy>
+
+        <!--
+        <copy todir="${docs.dir}" failonerror="true">
+            <fileset dir="${jss7.dir}/docs/userguide/jdocbook-restcomm/target/docbook/publish/en-US/pdf">
+                    <include name="*.pdf" />
+            </fileset>
         </copy
         <copy todir="${docs.dir}" failonerror="true">
-                <fileset dir="${jss7.dir}/docs/releasenotes/jdocbook-restcomm/target/docbook/publish/en-US/pdf">
-                        <include name="*.pdf" />
-                </fileset>
+            <fileset dir="${jss7.dir}/docs/releasenotes/jdocbook-restcomm/target/docbook/publish/en-US/pdf">
+                    <include name="*.pdf" />
+            </fileset>
         </copy>
         copy todir="${docs.dir}" failonerror="true">
-                <fileset dir="${jss7.dir}/docs/installationguide/jdocbook-restcomm/target/docbook/publish/en-US/pdf">
-                        <include name="*.pdf" />
-                </fileset>
-        </copy-->
-	</target>
+            <fileset dir="${jss7.dir}/docs/installationguide/jdocbook-restcomm/target/docbook/publish/en-US/pdf">
+                    <include name="*.pdf" />
+            </fileset>
+        </copy>
+        -->
+    </target>
 
 
 
