@@ -191,10 +191,22 @@
                 </fileset>
         </copy>
 
+<!--
         <copy todir="${restcomm.jss7.dist}/ss7/restcomm-ss7-service" failonerror="true">
                 <fileset dir="${jss7.dir}/service/target/restcomm-ss7-service">
                         <include name="**" />
                 </fileset>
+        </copy>
+-->
+        <copy todir="${restcomm.jss7.dist}/ss7/restcomm-ss7-service/extension" failonerror="true">
+            <fileset dir="${jss7.dir}/build/wildfly/extension/target/module">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <copy todir="${restcomm.jss7.dist}/ss7/restcomm-ss7-service/modules" failonerror="true">
+            <fileset dir="${jss7.dir}/build/wildfly/modules/target/module">
+                <include name="**"/>
+            </fileset>
         </copy>
 
     	<echo>Copy OAM ui</echo>
