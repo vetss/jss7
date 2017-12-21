@@ -33,6 +33,7 @@ import org.apache.log4j.Logger;
 import org.mobicents.protocols.ss7.sccp.SccpListener;
 import org.mobicents.protocols.ss7.sccp.SccpManagementEventListener;
 import org.mobicents.protocols.ss7.sccp.SccpProvider;
+import org.mobicents.protocols.ss7.sccp.SccpStack;
 import org.mobicents.protocols.ss7.sccp.impl.message.MessageFactoryImpl;
 import org.mobicents.protocols.ss7.sccp.impl.message.SccpDataMessageImpl;
 import org.mobicents.protocols.ss7.sccp.impl.message.SccpNoticeMessageImpl;
@@ -163,4 +164,9 @@ public class SccpProviderImpl implements SccpProvider, Serializable {
     public int getMaxUserDataLength(SccpAddress calledPartyAddress, SccpAddress callingPartyAddress, int msgNetworkId) {
         return this.stack.getMaxUserDataLength(calledPartyAddress, callingPartyAddress, msgNetworkId);
     }
+
+	@Override
+	public SccpStack getSccpStack() {
+		return this.stack;
+	}
 }

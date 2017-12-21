@@ -27,6 +27,7 @@ import java.io.IOException;
 import org.mobicents.protocols.ss7.sccp.SccpListener;
 import org.mobicents.protocols.ss7.sccp.SccpManagementEventListener;
 import org.mobicents.protocols.ss7.sccp.SccpProvider;
+import org.mobicents.protocols.ss7.sccp.SccpStack;
 import org.mobicents.protocols.ss7.sccp.impl.SccpStackImpl;
 import org.mobicents.protocols.ss7.sccp.impl.message.MessageFactoryImpl;
 import org.mobicents.protocols.ss7.sccp.impl.parameter.ParameterFactoryImpl;
@@ -101,5 +102,11 @@ public class SccpProviderWrapper implements SccpProvider {
     public void send(SccpNoticeMessage message) throws IOException {
         // TODO Auto-generated method stub
     }
+
+	@Override
+	public SccpStack getSccpStack() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -37,6 +37,7 @@ import javolution.xml.stream.XMLStreamException;
 
 import org.apache.log4j.Logger;
 import org.mobicents.protocols.ss7.sccp.SccpProvider;
+import org.mobicents.protocols.ss7.sccp.SccpStack;
 import org.mobicents.protocols.ss7.sccp.parameter.SccpAddress;
 import org.mobicents.protocols.ss7.tcap.api.TCAPCounterProvider;
 import org.mobicents.protocols.ss7.tcap.api.TCAPProvider;
@@ -536,4 +537,8 @@ public class TCAPStackImpl implements TCAPStack {
         }
     }
 
+	@Override
+	public SccpStack getSccpStack() {
+		return this.sccpProvider.getSccpStack();
+	}
 }

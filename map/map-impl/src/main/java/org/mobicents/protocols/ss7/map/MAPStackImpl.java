@@ -57,6 +57,7 @@ public class MAPStackImpl implements MAPStack, CongestionListener {
     public MAPStackImpl(String name, TCAPProvider tcapProvider) {
         this.name = name;
         mapProvider = new MAPProviderImpl(name, tcapProvider);
+        this.tcapStack = tcapProvider.getStack();
         this.state = State.CONFIGURED;
     }
 

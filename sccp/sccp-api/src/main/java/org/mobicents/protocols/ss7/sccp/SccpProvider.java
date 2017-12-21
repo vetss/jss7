@@ -94,4 +94,9 @@ public interface SccpProvider extends Serializable {
      */
     int getMaxUserDataLength(SccpAddress calledPartyAddress, SccpAddress callingPartyAddress, int msgNetworkId);
 
+    /**
+     * @return SCCP stack
+     */
+    SccpStack getSccpStack();
+
 }
